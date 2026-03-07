@@ -7,11 +7,12 @@ def get_students():
         name = input("student name: ").strip()
         name = name.lower().title()
 
-        if name == False:
+        if name == "":
             break
         student_list.append({
             "name": name
         })
-        
 
-    print(student_list)
+get_students()
+
+print(student_list)
