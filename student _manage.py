@@ -1,18 +1,17 @@
-students = []
-name = None
+student_list = []
 
-num_student = input("how many students will you add? >")
-num_student = int(num_student)
-print("type a students name")
-print("when you are done just press enter")
-for i in num_student:
-    name = input("student name: ").lower().title
+def get_students():
+    print("type a students name")
+    print("when you are done just press enter")
+    while True:
+        name = input("student name: ").strip()
+        name = name.lower().title()
 
-    if name == "":
-        continue
-    students.append({
-        "name": name
-    })
-    
+        if name == False:
+            break
+        student_list.append({
+            "name": name
+        })
+        
 
-print(students)
+    print(student_list)
