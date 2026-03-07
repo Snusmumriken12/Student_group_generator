@@ -28,6 +28,8 @@ def set_student_state(seen_names):
     
 
     while True:
+        seen_name = set()
+        seen_name += student_list["name"]
         status = input("-> ").strip()
         status = status.lower().title()
         if status == "":
@@ -35,7 +37,7 @@ def set_student_state(seen_names):
         elif status in seen_names:    
            for student in student_list:
                if student["name"] == status:
-                    student["active"] == False
+                    student["status"] = False
                     break
 
         else:
@@ -45,7 +47,8 @@ def set_student_state(seen_names):
 
 def main ():
     get_students()
-    set_student_state("seen_names")    
+    seen_names = get_students()
+    set_student_state(seen_names)    
     print(student_list)
 
 main()
