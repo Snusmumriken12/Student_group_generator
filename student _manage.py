@@ -20,18 +20,27 @@ def get_students():
             "name": name,
             "status": state
         })
-    return name
-def set_student_state(name):
+    return seen_names
+def set_student_state(seen_names):
     print("is there any students that are not present?")
     print(student_list)
-    status = input("-> ")
+    
 
+    while True:
+        status = input("-> ")
+        if status == "":
+            break
+        elif status in seen_names:    
+            state = False
 
+            student_list.append({
+                "status": state
+            })
 
 
 def main ():
     get_students()
-    #set_student_state()    
+    set_student_state()    
     print(student_list)
 
 main()
