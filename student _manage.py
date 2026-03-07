@@ -1,5 +1,4 @@
 student_list = []
-
 def get_students():
     seen_names = set()
     print("type a students name")
@@ -19,6 +18,17 @@ def get_students():
         student_list.append({
             "name": name
         })
+    
+def set_student_state():
+    state = True
+
+    student_list.append({
+        "name": name
+        "status": state
+    })
+
+    
+
 
 get_students()
 
