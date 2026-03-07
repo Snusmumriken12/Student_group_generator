@@ -22,14 +22,12 @@ def get_students():
 def set_student_state():
     state = True
 
-    student_list.append({
-        "name": name
-        "status": state
-    })
+    #for student in student_list: #not working yet
+     
 
-    
+def main ():
+    get_students()
+    set_student_state()    
+    print(student_list)
 
-
-get_students()
-
-print(student_list)
+main()
