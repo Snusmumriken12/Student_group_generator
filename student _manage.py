@@ -1,3 +1,4 @@
+import json
 student_list = []
 def get_students():
     seen_names = set()
@@ -82,16 +83,17 @@ def rename_student(seen_names):
         else:
             print("student not found...")    
 
-    
 def main ():
     seen_names = get_students()
     set_student_state(seen_names)    
     remove_student(seen_names)
+    rename_student(seen_names)
     for student in student_list:
         if student["status"] == True:
             print (student["name"])
         else:
             print(f"{student['name']} (ABSENT)")
+    
 
 
 main()
