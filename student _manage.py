@@ -42,12 +42,36 @@ def set_student_state(seen_names):
         
         else:
             print("name does not exist...")
+
+def remove_student(seen_names):
+    print("Do you want to remove a student from the group?")
+    print("just press enter to contiune: ")
+    for student in student_list:
+        print(student["name"])
+
+    while True:
+        student = input("student name--> ").strip()
+        student = student.lower().title()
+        if student == "":
+            break
+
+        elif:
+            for student in student_list:
+                if student["name"] == student:
+                    student_list.remove(student)
+                    student("student removed")
+                    
+            else:
+                print("student not found:")
             
+
+
 
 
 def main ():
     seen_names = get_students()
     set_student_state(seen_names)    
+    remove_student()
     for student in student_list:
         if student["status"] == True:
             print (student["name"])
