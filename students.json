@@ -1,0 +1,46 @@
+[
+    {
+        "name": "Linus",
+        "status": true
+    },
+    {
+        "name": "Anders",
+        "status": false
+    },
+    {
+        "name": "Fanny",
+        "status": false
+    },
+    {
+        "name": "Lasse",
+        "status": true
+    },
+    {
+        "name": "Leo",
+        "status": true
+    },
+    {
+        "name": "Erik",
+        "status": true
+    },
+    {
+        "name": "Theo",
+        "status": true
+    },
+    {
+        "name": "Hampus",
+        "status": true
+    },
+    {
+        "name": "\u00c5sa",
+        "status": true
+    },
+    {
+        "name": "Magnus G",
+        "status": true
+    },
+    {
+        "name": "Magnus W",
+        "status": true
+    }
+]

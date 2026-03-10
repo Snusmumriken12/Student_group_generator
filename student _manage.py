@@ -70,12 +70,13 @@ def remove_student(seen_names):
 
 def rename_student(seen_names):
     while True:
-        change_student = input("What student do you want to rename? (enter to exit) --> ")
+        change_student = input("What student do you want to rename? (enter to exit) --> ").strip
+        change_student = change_student.lower().title()
         if change_student == "":
             break
         elif change_student in seen_names:
             new_name = input("what should the new name be?").strip()
-            new_name == new_name.lower().title()
+            new_name = new_name.lower().title()
             for student in student_list:
                 if student["name"] == change_student:
                     student["name"] = new_name
