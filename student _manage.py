@@ -20,6 +20,7 @@ def get_students():
             "name": name,
             "status": state
         })
+
     return seen_names
 def set_student_state(seen_names):
     print("is there any students that are not present?")
@@ -46,7 +47,6 @@ def set_student_state(seen_names):
 
 
 def main ():
-    get_students()
     seen_names = get_students()
     set_student_state(seen_names)    
     print(student_list)
