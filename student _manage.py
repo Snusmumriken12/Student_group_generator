@@ -1,7 +1,6 @@
 student_list = []
 def get_students():
     seen_names = set()
-    state = True
     print("type a students name")
     print("when you are done just press enter")
     while True:
@@ -18,7 +17,7 @@ def get_students():
 
         student_list.append({
             "name": name,
-            "status": state
+            "status": True
         })
 
     return seen_names
@@ -26,7 +25,10 @@ def set_student_state(seen_names):
     print("is there any students that are not present?")
     print("enter to continue")
     for student in student_list:
-        print(student["name"])
+        if student["status"]:
+            print(f"{student['name']} (PRESENT)")
+        else:
+            print(f"{student['name']} (ABSENT)")
     
 
     while True:
@@ -37,7 +39,7 @@ def set_student_state(seen_names):
         elif status in seen_names:    
            for student in student_list:
                if student["name"] == status:
-                    student["status"] = False
+                    student["status"] = not student("status")
                     break
         
         else:
@@ -57,23 +59,13 @@ def remove_student(seen_names):
 
         elif rem_student in seen_names:
             for student in student_list:
-                student_list.remove(student)
+                if student["name"] == rem_student:
+                    student_list.remove(student)
+                    seen_names.remove(rem_student)
         
         else:
             print("Student not found...")
-        #elif:
-            #for student in student_list:
-               # if student["name"] == student:
-            #        student_list.remove(student)
-             #       student("student removed")
-                    
-           # else:
-           #     print("student not found:")
-            
-
-
-
-
+    
 def main ():
     seen_names = get_students()
     set_student_state(seen_names)    
