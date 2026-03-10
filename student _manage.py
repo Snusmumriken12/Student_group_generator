@@ -25,7 +25,8 @@ def get_students():
 def set_student_state(seen_names):
     print("is there any students that are not present?")
     print("enter to continue")
-    print(student_list)
+    for student in student_list:
+        print(student["name"])
     
 
     while True:
