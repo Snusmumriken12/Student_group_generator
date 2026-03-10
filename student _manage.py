@@ -39,7 +39,7 @@ def set_student_state(seen_names):
         elif status in seen_names:    
            for student in student_list:
                if student["name"] == status:
-                    student["status"] = not student("status")
+                    student["status"] = not student["status"]
                     break
         
         else:
@@ -65,6 +65,23 @@ def remove_student(seen_names):
         
         else:
             print("Student not found...")
+
+def rename_student(seen_names):
+    while True:
+        change_student = input("What student do you want to rename? (enter to exit) --> ")
+        if change_student == "":
+            break
+        elif change_student in seen_names:
+            new_name = input("what should the new name be?").strip()
+            new_name == new_name.lower().title()
+            for student in student_list:
+                if student["name"] == change_student:
+                    student["name"] = new_name
+                    seen_names.remove(change_student)
+                    seen_names.add(new_name)
+        else:
+            print("student not found...")    
+
     
 def main ():
     seen_names = get_students()
