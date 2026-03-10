@@ -50,19 +50,25 @@ def remove_student(seen_names):
         print(student["name"])
 
     while True:
-        student = input("student name--> ").strip()
-        student = student.lower().title()
-        if student == "":
+        rem_student = input("student name--> ").strip()
+        rem_student = rem_student.lower().title()
+        if rem_student == "":
             break
 
-        elif:
+        elif rem_student in seen_names:
             for student in student_list:
-                if student["name"] == student:
-                    student_list.remove(student)
-                    student("student removed")
+                student_list.remove(student)
+        
+        else:
+            print("Student not found...")
+        #elif:
+            #for student in student_list:
+               # if student["name"] == student:
+            #        student_list.remove(student)
+             #       student("student removed")
                     
-            else:
-                print("student not found:")
+           # else:
+           #     print("student not found:")
             
 
 
@@ -71,7 +77,7 @@ def remove_student(seen_names):
 def main ():
     seen_names = get_students()
     set_student_state(seen_names)    
-    remove_student()
+    remove_student(seen_names)
     for student in student_list:
         if student["status"] == True:
             print (student["name"])
