@@ -29,8 +29,6 @@ def set_student_state(seen_names):
     
 
     while True:
-        seen_name = set()
-        seen_name += student_list["name"]
         status = input("-> ").strip()
         status = status.lower().title()
         if status == "":
