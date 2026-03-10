@@ -1,4 +1,5 @@
 import json
+from storage import save_students, load_students
 student_list = []
 def get_students():
     seen_names = set()
@@ -84,6 +85,7 @@ def rename_student(seen_names):
             print("student not found...")    
 
 def main ():
+    load_students()
     seen_names = get_students()
     set_student_state(seen_names)    
     remove_student(seen_names)
@@ -93,7 +95,7 @@ def main ():
             print (student["name"])
         else:
             print(f"{student['name']} (ABSENT)")
-    
+    save_students(student_list)
 
 
 main()
