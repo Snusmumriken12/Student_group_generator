@@ -38,7 +38,7 @@ def set_student_state(seen_names):
                if student["name"] == status:
                     student["status"] = False
                     break
-
+        
         else:
             print("name does not exist...")
             
@@ -47,6 +47,11 @@ def set_student_state(seen_names):
 def main ():
     seen_names = get_students()
     set_student_state(seen_names)    
-    print(student_list)
+    for student in student_list:
+        if student["status"] == True:
+            print (student["name"])
+        else:
+            print(f"{student['name']} (ABSENT)")
+
 
 main()
