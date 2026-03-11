@@ -3,6 +3,7 @@ from storage import save_students, load_students
 student_list = []
 def get_students():
     seen_names = set()
+    seen_names = {student["name"] for student in student_list}
     print("type a students name")
     print("when you are done just press enter")
     while True:
@@ -70,7 +71,7 @@ def remove_student(seen_names):
 
 def rename_student(seen_names):
     while True:
-        change_student = input("What student do you want to rename? (enter to exit) --> ").strip
+        change_student = input("What student do you want to rename? (enter to exit) --> ").strip()
         change_student = change_student.lower().title()
         if change_student == "":
             break
@@ -86,7 +87,7 @@ def rename_student(seen_names):
             print("student not found...")    
 
 def main ():
-    load_students()
+    student_list = load_students()
     seen_names = get_students()
     set_student_state(seen_names)    
     remove_student(seen_names)
