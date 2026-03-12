@@ -13,23 +13,27 @@ def create_class(classes):
     print(f"Class '{class_name}' created.")
 
 def rename_class(classes):
+   print("\n Existing Classes")
+   for c in classes:
+       print("-", c)
    while True:
     choice = input("What Class Name Do You Want To Rename? (Enter to exit)--> ").title().strip()
     if choice == "":
        break
     elif choice in classes:
         new_class_name = input("What Is The New Name? > ").title().strip()
-    if new_class_name == "":
-        print("class name cant be empty")
-    elif new_class_name in classes:
-        print("class name already exist")
-    elif new_class_name not in classes:
-        print("class not found")
-    else:
-        classes[new_class_name] = classes[choice]
-        del classes[choice]
-        print(f"{choice} renamed to {new_class_name}")
+        if new_class_name == "":
+            print("class name cant be empty")
+        elif new_class_name in classes:
+            print("class name already exist")
+        else:
+            classes[new_class_name] = classes[choice]
+            del classes[choice]
+            print(f"{choice} renamed to {new_class_name}")
+            break
 
+    else:
+        print("class not found")
 
 
 
