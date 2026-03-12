@@ -40,17 +40,18 @@ def remove_class(classes):
     for c in classes:
         print("-", c)
     while True:
-        choice = input("What Class Do You Want To Remove?").title().strip()
+        choice = input("What Class Do You Want To Remove? (enter to exit) -> ").title().strip()
 
         if choice == "":
-            print("cant be empty")
+            break
         elif choice in classes:
             print (f"Are You Sure You Want To Delete {choice}?")
             confirm = input("y/n").lower()
             if confirm == "y":
                 del classes[choice]
-            else:
                 break
+            else:
+                print("deletion cancelled")
         else:
             print("class not found...")
     
