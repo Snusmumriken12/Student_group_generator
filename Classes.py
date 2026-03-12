@@ -19,8 +19,16 @@ def rename_class(classes):
        break
     elif choice in classes:
         new_class_name = input("What Is The New Name? > ").title().strip()
-
-    
+    if new_class_name == "":
+        print("class name cant be empty")
+    elif new_class_name in classes:
+        print("class name already exist")
+    elif new_class_name not in classes:
+        print("class not found")
+    else:
+        classes[new_class_name] = classes[choice]
+        del classes[choice]
+        print(f"{choice} renamed to {new_class_name}")
 
 
 
