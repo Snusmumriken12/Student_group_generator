@@ -35,6 +35,25 @@ def rename_class(classes):
     else:
         print("class not found")
 
+def remove_class(classes):
+    print("\n Existing Classes")
+    for c in classes:
+        print("-", c)
+    while True:
+        choice = input("What Class Do You Want To Remove?").title().strip()
+
+        if choice == "":
+            print("cant be empty")
+        elif choice in classes:
+            print (f"Are You Sure You Want To Delete {choice}?")
+            confirm = input("y/n").lower()
+            if confirm == "y":
+                del classes[choice]
+            else:
+                break
+        else:
+            print("class not found...")
+    
 
 
 def main(classes):
