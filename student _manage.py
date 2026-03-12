@@ -87,6 +87,7 @@ def rename_student(seen_names):
             print("student not found...")    
 
 def main ():
+    global student_list
     student_list = load_students()
     seen_names = get_students()
     set_student_state(seen_names)    

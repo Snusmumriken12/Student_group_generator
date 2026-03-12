@@ -8,7 +8,7 @@ def create_class(classes):
         return
     elif class_name in classes:
         print("that class already exist")
-
+        return
     classes[class_name] = []
     print(f"Class '{class_name}' created.")
 
@@ -63,7 +63,7 @@ def main(classes):
         print("\n1. Create Class ")
         print("2. Show classes")
         print("3. rename classes")
-        print("3. Exit")
+        print("4. Exit")
 
         choice = input("Choose-> ")
         try:
@@ -73,10 +73,11 @@ def main(classes):
         
         if choice == 1:
             create_class(classes)
-        
         elif choice == 2:
             print(classes)
         elif choice == 3:
+            rename_class(classes)
+        elif choice == 4:
             break
         else:
             print("not a valid number")
