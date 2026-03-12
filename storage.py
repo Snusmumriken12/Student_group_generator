@@ -10,3 +10,8 @@ def load_students():
             return json.load(file)
     except FileNotFoundError:
         return[]
+    
+def save_classes(classes):
+    with open ("classes.json", "w") as file:
+        json.dumb(classes, file, indent=4)
+    print("Classes Saved")
