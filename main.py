@@ -20,3 +20,18 @@ def main():
 
         if choice == 1:
             create_class(classes)
+        elif choice == 2:
+            print("\nclasses")
+            for c in classes:
+                print("-",c)
+
+            class_name = input="select class".title().strip()
+
+            if class_name in classes:
+                manage_students(classes[class_name])
+            else:
+                print("Class Not Found")
+        elif choice == 3:
+            rename_class(classes)
+        elif choice == 4:
+            remove_class(classes)
