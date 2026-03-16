@@ -1,7 +1,7 @@
 from storage import load_classes, save_classes
 from Classes import create_class, rename_class, remove_class
 from student_manage import manage_students
-
+from group_gen import generate_group
 
 def main():
     classes = load_classes()
@@ -11,7 +11,8 @@ def main():
         print("2. Manage Class Students")
         print("3. Rename Class")
         print("4. Remove Class")
-        print("5. Exit")
+        print("5. Generate Group")
+        print("6. Exit")
 
         choice = input("->")
         try:
@@ -38,4 +39,6 @@ def main():
         elif choice == 4:
             remove_class(classes)
         elif choice == 5:
+            generate_group()
+        elif choice == 6:
             break
