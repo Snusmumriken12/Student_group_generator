@@ -84,7 +84,16 @@ def rename_student(seen_names):
                     seen_names.remove(change_student)
                     seen_names.add(new_name)
         else:
-            print("student not found...")    
+            print("student not found...")  
+             
+def manage_students(student_list):
+
+    seen_names = {student["name"] for student in student_list}
+
+    get_students()
+    set_student_state(seen_names)
+    remove_student(seen_names)
+    rename_student(seen_names) 
 
 def main ():
     global student_list

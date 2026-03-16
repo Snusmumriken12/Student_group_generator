@@ -1,9 +1,10 @@
 from storage import load_classes, save_classes
 from Classes import create_class, rename_class, remove_class
-from students import manage_students
+from student_manage import manage_students
+
 
 def main():
-    classes = load_classes
+    classes = load_classes()
 
     while True:
         print("\n1. Create Class")
@@ -17,6 +18,7 @@ def main():
             choice = int(choice)
         except ValueError:
             print("value error...")
+            continue
 
         if choice == 1:
             create_class(classes)
@@ -25,7 +27,7 @@ def main():
             for c in classes:
                 print("-",c)
 
-            class_name = input="select class".title().strip()
+            class_name = input("select class").title().strip()
 
             if class_name in classes:
                 manage_students(classes[class_name])
