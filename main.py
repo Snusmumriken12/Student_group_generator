@@ -12,7 +12,8 @@ def main():
         print("3. Rename Class")
         print("4. Remove Class")
         print("5. Generate Group")
-        print("6. Exit")
+        print("6. Show Classes")
+        print("7. Exit")
 
         choice = input("->")
         try:
@@ -41,6 +42,8 @@ def main():
         elif choice == 5:
             generate_group()
         elif choice == 6:
+            print(classes)
+        elif choice == 7:
             break
 main()
 
