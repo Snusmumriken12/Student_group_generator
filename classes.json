@@ -1,3 +1,52 @@
 {
-    "4A": []
+    "4A": [
+        {
+            "name": "Oliver",
+            "status": true
+        },
+        {
+            "name": "Linus",
+            "status": true
+        },
+        {
+            "name": "Mange",
+            "status": true
+        },
+        {
+            "name": "Leo",
+            "status": true
+        },
+        {
+            "name": "Hugo",
+            "status": true
+        },
+        {
+            "name": "Sotirios",
+            "status": true
+        },
+        {
+            "name": "Elliot W",
+            "status": true
+        },
+        {
+            "name": "Elliot G",
+            "status": true
+        },
+        {
+            "name": "Maja",
+            "status": true
+        },
+        {
+            "name": "Alicia",
+            "status": true
+        },
+        {
+            "name": "\u00c4ngla",
+            "status": true
+        },
+        {
+            "name": "Winston",
+            "status": true
+        }
+    ]
 }
