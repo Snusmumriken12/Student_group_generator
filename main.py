@@ -39,15 +39,21 @@ def main():
                 print("Class Not Found")
         elif choice == 3:
             rename_class(classes)
+            save_classes(classes)
         elif choice == 4:
             remove_class(classes)
+            save_classes(classes)
         elif choice == 5:
-            generate_group()
+            generate_group(classes)
+            save_classes(classes)
         elif choice == 6:
             print(classes)
         elif choice == 7:
+            save_classes(classes)
             break
 main()
 
 #bug in the rename student funct: "name does not exist"
-#
+#bug in the remove student funct: "student not found"
+#bug in the student status funct: "student no found"
+#bug it playes the whole student mange loop when student manage is selected

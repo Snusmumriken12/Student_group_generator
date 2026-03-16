@@ -1,8 +1,7 @@
 import random
 from storage import load_classes
 
-classes = load_classes()
-def generate_group():
+def generate_group(classes):
     print("Classes")
     for c in classes:
         print("-", c)
@@ -11,10 +10,11 @@ def generate_group():
 
     if class_name not in classes:
         print("Class not found...")
+        return
 
     students = classes[class_name]
     present_students = []
-    for students in students:
+    for student in students:
         if students["status"]:
             present_students.append(students["name"])
 
