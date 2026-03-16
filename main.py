@@ -56,4 +56,5 @@ main()
 #bug in the rename student funct: "name does not exist"
 #bug in the remove student funct: "student not found"
 #bug in the student status funct: "student no found"
+#bug classes does not save properly
 #bug it playes the whole student mange loop when student manage is selected
