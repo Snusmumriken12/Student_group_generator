@@ -42,5 +42,7 @@ def main():
             generate_group()
         elif choice == 6:
             break
-
 main()
+
+#bug in the rename student funct: "name does not exist"
+#

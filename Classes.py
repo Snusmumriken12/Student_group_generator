@@ -57,30 +57,6 @@ def remove_class(classes):
     
 
 
-def main(classes):
-    while True:
 
-        print("\n1. Create Class ")
-        print("2. Show classes")
-        print("3. rename classes")
-        print("4. Exit")
 
-        choice = input("Choose-> ")
-        try:
-            choice = int(choice)
-        except ValueError:    
-            print("Value Error...")
-        
-        if choice == 1:
-            create_class(classes)
-        elif choice == 2:
-            print(classes)
-        elif choice == 3:
-            rename_class(classes)
-        elif choice == 4:
-            break
-        else:
-            print("not a valid number")
-
-main(classes)
 

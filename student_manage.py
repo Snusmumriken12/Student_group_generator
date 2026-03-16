@@ -85,7 +85,7 @@ def rename_student(seen_names):
                     seen_names.add(new_name)
         else:
             print("student not found...")  
-             
+
 def manage_students(student_list):
 
     seen_names = {student["name"] for student in student_list}
@@ -95,19 +95,5 @@ def manage_students(student_list):
     remove_student(seen_names)
     rename_student(seen_names) 
 
-def main ():
-    global student_list
-    student_list = load_students()
-    seen_names = get_students()
-    set_student_state(seen_names)    
-    remove_student(seen_names)
-    rename_student(seen_names)
-    for student in student_list:
-        if student["status"] == True:
-            print (student["name"])
-        else:
-            print(f"{student['name']} (ABSENT)")
-    save_students(student_list)
 
 
-main()
