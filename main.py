@@ -42,3 +42,5 @@ def main():
             generate_group()
         elif choice == 6:
             break
+
+main()
