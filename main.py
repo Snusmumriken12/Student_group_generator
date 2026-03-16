@@ -35,3 +35,5 @@ def main():
             rename_class(classes)
         elif choice == 4:
             remove_class(classes)
+        elif choice == 5:
+            break
