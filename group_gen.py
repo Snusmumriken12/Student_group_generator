@@ -15,8 +15,8 @@ def generate_group(classes):
     students = classes[class_name]
     present_students = []
     for student in students:
-        if students["status"]:
-            present_students.append(students["name"])
+        if student["status"]:
+            present_students.append(student["name"])
 
     random.shuffle(present_students)
 

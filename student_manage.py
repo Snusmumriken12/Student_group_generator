@@ -102,12 +102,45 @@ def rename_student(student_list, seen_names):
 
 
 def manage_students(student_list):
-    seen_names = {student["name"] for student in student_list}
+    while True:
+        seen_names = {student["name"] for student in student_list}
 
-    get_students(student_list)
-    seen_names = {student["name"] for student in student_list}
+        print("\n1. add students")
+        print("2. mark students present/absent")
+        print("3. remove student from class")
+        print("4. rename a student")
+        print("5. Show students")
+        print("6. back")
+        choice = input("--> ")
+        if choice == "":
+            print("cant be empty")
+            continue
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("ValueError")
+            continue
 
-    set_student_state(student_list, seen_names)
-    remove_student(student_list, seen_names)
-    rename_student(student_list, seen_names)
+        if choice == 1:
+            get_students(student_list)
+        elif choice == 2:
+            set_student_state(student_list, seen_names)
+        elif choice == 3:
+            remove_student(student_list, seen_names)
+        elif choice == 4:
+            rename_student(student_list, seen_names)
+        elif choice == 5:
+            for student in student_list:
+                print(student["name"])
+        elif choice == 6:
+            break
+
+
+
+    #get_students(student_list)
+    #seen_names = {student["name"] for student in student_list}
+
+    #set_student_state(student_list, seen_names)
+    #remove_student(student_list, seen_names)
+    #rename_student(student_list, seen_names)
 
