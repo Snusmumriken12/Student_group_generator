@@ -34,7 +34,7 @@ def generate_group(classes):
                 group_size = int(group_size)
             except ValueError:
                 print("ValueError")
-                return
+                continue
             
             groups = []
 
@@ -46,7 +46,7 @@ def generate_group(classes):
                 print(f"\nGroup {i}")
                 for student in group:
                     print("-", student)
-
+            break
     elif choice == 2:
         while True:
             num_groups_input = input("How many groups--> ")
@@ -55,6 +55,7 @@ def generate_group(classes):
                 num_groups = int(num_groups_input)
             except ValueError:
                 print("Enter a number...")
+                continue
 
             if num_groups <= 0:
                 print("Must be > 0")
@@ -74,4 +75,4 @@ def generate_group(classes):
                 print(f"\nGroup {i}")
                 for student in group:
                     print("-", student)
-
+            break
