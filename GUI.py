@@ -89,9 +89,17 @@ class StudentGroupGUI:
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
 
+        def _on_mousewheel(event):
+            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
-        tk.Button(right_frame, text="Toggle Present/Absent", command=self.toggle_student_status).pack(fill="x")
+        def _bind_to_mousewheel(event):
+            canvas.bind_all("<MouseWheel>", _on_mousewheel)
 
+        def _unbind_from_mousewheel(event):
+            canvas.unbind_all("<MouseWheel>")
+
+        canvas.bind("<Enter>", _bind_to_mousewheel)
+        canvas.bind("<Leave>", _unbind_from_mousewheel)
         # MIDDLE CONTROLS - GROUP OPTIONS
         controls_frame = tk.Frame(self.root, bd=2, relief="groove", padx=10, pady=10)
         controls_frame.grid(row=1, column=1, sticky="nsew", padx=10, pady=5)
