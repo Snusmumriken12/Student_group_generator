@@ -67,8 +67,28 @@ class StudentGroupGUI:
 
         tk.Label(right_frame, text="Present", font=("Arial", 14, "bold")).pack(anchor="w")
 
-        self.student_listbox = tk.Listbox(right_frame, width=28, height=25)
-        self.student_listbox.pack(fill="both", expand=True, pady=8)
+        # RIGHT PANEL - PRESENT / ABSENT
+        right_frame = tk.Frame(self.root, bd=2, relief="groove", padx=8, pady=8)
+        right_frame.grid(row=0, column=2, rowspan=2, sticky="nsew", padx=10, pady=10)
+
+        tk.Label(right_frame, text="Present", font=("Arial", 14, "bold")).pack(anchor="w")
+
+        # Scrollable frame (because 20+ kids = chaos otherwise)
+        canvas = tk.Canvas(right_frame)
+        scrollbar = tk.Scrollbar(right_frame, orient="vertical", command=canvas.yview)
+        self.students_frame = tk.Frame(canvas)
+
+        self.students_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+
+        canvas.create_window((0, 0), window=self.students_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
 
         tk.Button(right_frame, text="Toggle Present/Absent", command=self.toggle_student_status).pack(fill="x")
 
@@ -131,14 +151,34 @@ class StudentGroupGUI:
             self.class_listbox.insert(tk.END, class_name)
 
     def refresh_student_list(self):
-        self.student_listbox.delete(0, tk.END)
+        # Clear old widgets
+        for widget in self.students_frame.winfo_children():
+            widget.destroy()
 
         if self.selected_class is None:
             return
 
+        self.student_vars = {}
+
         for student in self.classes[self.selected_class]:
-            status = "PRESENT" if student["status"] else "ABSENT"
-            self.student_listbox.insert(tk.END, f'{student["name"]} ({status})')
+            var = tk.BooleanVar(value=student["status"])
+            self.student_vars[student["name"]] = var
+
+            cb = tk.Checkbutton(
+                self.students_frame,
+                text=student["name"],
+                variable=var,
+                command=lambda name=student["name"], v=var: self.update_status(name, v)
+            )
+            cb.pack(anchor="w")
+    def update_status(self, student_name, var):
+        for student in self.classes[self.selected_class]:
+            if student["name"] == student_name:
+                student["status"] = var.get()
+                break
+
+        save_classes(self.classes)
+        self.show_feedback(f"Updated '{student_name}'")
 
     def update_group_label(self):
         if self.group_mode.get() == "size":
@@ -263,25 +303,6 @@ class StudentGroupGUI:
 
         raw_text = self.student_listbox.get(selection[0])
         return raw_text.split(" (")[0]
-
-    def toggle_student_status(self):
-        if self.selected_class is None:
-            messagebox.showerror("Error", "Select a class first.")
-            return
-
-        student_name = self.get_selected_student_name()
-        if not student_name:
-            messagebox.showerror("Error", "Select a student first.")
-            return
-
-        for student in self.classes[self.selected_class]:
-            if student["name"] == student_name:
-                student["status"] = not student["status"]
-                break
-
-        save_classes(self.classes)
-        self.refresh_student_list()
-        self.show_feedback(f"Toggled status for '{student_name}'.")
 
     def remove_student(self):
         if self.selected_class is None:
