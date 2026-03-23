@@ -8,6 +8,10 @@ def generate_group(classes):
 
     class_name = input("Select Class--> ").title().strip()
 
+    if not present_students:
+        print("No students present...")
+        return None, None
+
     if class_name not in classes:
         print("Class not found...")
         return None, None

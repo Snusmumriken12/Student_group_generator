@@ -6,7 +6,6 @@ from storage import save_groups
 
 def main():
     classes = load_classes()
-    class_name, groups = generate_group(classes)
 
     while True:
         print("\n1. Create Class")
@@ -46,9 +45,9 @@ def main():
             remove_class(classes)
             save_classes(classes)
         elif choice == 5:
-            generate_group(classes)
-            save_classes(classes)
-            save_groups(class_name, groups)
+            class_name, groups = generate_group(classes)
+            if groups:
+                save_groups(class_name, groups)
         elif choice == 6:
             print(classes)
         elif choice == 7:
