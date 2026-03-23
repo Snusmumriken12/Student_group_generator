@@ -2,9 +2,11 @@ from storage import load_classes, save_classes
 from Classes import create_class, rename_class, remove_class
 from student_manage import manage_students
 from group_gen import generate_group
+from storage import save_groups
 
 def main():
     classes = load_classes()
+    class_name, groups = generate_group(classes)
 
     while True:
         print("\n1. Create Class")
@@ -46,6 +48,7 @@ def main():
         elif choice == 5:
             generate_group(classes)
             save_classes(classes)
+            save_groups(class_name, groups)
         elif choice == 6:
             print(classes)
         elif choice == 7:

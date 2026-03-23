@@ -22,3 +22,17 @@ def load_classes():
             return json.load(file)
     except FileNotFoundError:
         return{}
+
+def save_groups(class_name, groups):
+    filename = f"{class_name}_groups.json"
+
+    data = {
+        "class": class_name,
+        "groups": groups
+    }
+
+    try:
+        with open(filename, "w") as file:
+            json.dump(data, file, indent=4)
+    except Exception as e:
+        print(f"Error saving groups: {e}")

@@ -10,7 +10,7 @@ def generate_group(classes):
 
     if class_name not in classes:
         print("Class not found...")
-        return
+        return None, None
 
     students = classes[class_name]
     present_students = []
@@ -26,7 +26,7 @@ def generate_group(classes):
         choice = int(choice)
     except ValueError:
         print("ValueError")
-        return
+        return None, None
     if choice == 1:
         while True:
             group_size = input("how many per group -> ")
@@ -46,7 +46,7 @@ def generate_group(classes):
                 print(f"\nGroup {i}")
                 for student in group:
                     print("-", student)
-            break
+            return class_name, groups
     elif choice == 2:
         while True:
             num_groups_input = input("How many groups--> ")
@@ -75,4 +75,4 @@ def generate_group(classes):
                 print(f"\nGroup {i}")
                 for student in group:
                     print("-", student)
-            break
+            return class_name, groups
