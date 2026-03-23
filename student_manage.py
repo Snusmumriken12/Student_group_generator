@@ -135,12 +135,3 @@ def manage_students(student_list):
         elif choice == 6:
             break
 
-
-
-    #get_students(student_list)
-    #seen_names = {student["name"] for student in student_list}
-
-    #set_student_state(student_list, seen_names)
-    #remove_student(student_list, seen_names)
-    #rename_student(student_list, seen_names)
-

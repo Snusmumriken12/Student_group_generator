@@ -19,17 +19,22 @@ def generate_group(classes):
             present_students.append(student["name"])
 
     random.shuffle(present_students)
+    while True:
+        group_size = input("how many per group -> ")
+        try:
+            group_size = int(group_size)
+        except ValueError:
+            print("ValueError")
+            return
+        groups = []
 
-    group_size = 2
-    groups = []
-
-    for i in range(0, len(present_students), group_size):
-        group = present_students[i:i+group_size]
-        groups.append(group)
-    
-    for i, group in enumerate(groups, start=1):
-        print(f"\nGroup {i}")
-        for student in group:
-            print("-", student)
+        for i in range(0, len(present_students), group_size):
+            group = present_students[i:i+group_size]
+            groups.append(group)
+        
+        for i, group in enumerate(groups, start=1):
+            print(f"\nGroup {i}")
+            for student in group:
+                print("-", student)
 
 
