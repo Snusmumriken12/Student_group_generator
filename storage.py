@@ -10,6 +10,28 @@ BASE_DIR = Path(__file__).resolve().parent
 CLASSES_FILE = BASE_DIR / "classes.json"
 STUDENTS_FILE = BASE_DIR / "students.json"
 
+def ensure_data_shape(classes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Make older saves compatible with this version."""
+    normalized: list[dict[str, Any]] = []
+    for class_entry in classes:
+        normalized.append(
+            {
+                "id": class_entry.get("id", create_id()),
+                "name": class_entry.get("name", "Unnamed class"),
+                "students": [
+                    {
+                        "id": student.get("id", create_id()),
+                        "name": student.get("name", "Unnamed student"),
+                        "present": bool(student.get("present", student.get("status", True))),
+                    }
+                    for student in class_entry.get("students", [])
+                ],
+                "groups": class_entry.get("groups", []),
+                "generatedAt": class_entry.get("generatedAt"),
+            }
+        )
+    return normalized
+
 
 def _create_id() -> str:
     return f"{int(datetime.now().timestamp() * 1000)}-{random.randint(100000, 999999)}"
@@ -116,7 +138,10 @@ def load_students() -> list[dict[str, Any]]:
 
 
 def save_classes(classes: list[dict[str, Any]], data_file: Path) -> None:
-    data_file.write_text(json.dumps(classes, indent=2, ensure_ascii=False), encoding="utf-8")
+    data_file.write_text(
+        json.dumps(classes, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
 
 
