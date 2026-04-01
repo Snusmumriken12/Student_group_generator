@@ -60,3 +60,4 @@ main()
 #bug in the student status funct: "student no found"
 #bug classes does not save properly (fixed)
 #bug it playes the whole student mange loop when student manage is selected
+#git remote add origin https://github.com/Snusmumriken12/Student_group_generator.git

@@ -8,6 +8,9 @@ def generate_group(classes):
 
     class_name = input("Select Class--> ").title().strip()
 
+    students = classes[class_name]
+    present_students = [s["name"] for s in students if s["status"]]
+
     if not present_students:
         print("No students present...")
         return None, None
