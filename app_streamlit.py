@@ -142,7 +142,7 @@ def sync_presence_from_widget(selected_class: dict[str, Any]) -> bool:
 
 
 # ---------- session bootstrap ----------
-steacher_name_input = st.text_input(
+teacher_name_input = st.text_input(
     "Enter your name",
     placeholder="e.g. Linus G"
 )
