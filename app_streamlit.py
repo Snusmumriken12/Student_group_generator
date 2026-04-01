@@ -74,12 +74,12 @@ def ensure_data_shape(classes: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return normalized
 
 
-def load_classes() -> list[dict[str, Any]]:
-    if not DATA_FILE.exists():
+def load_classes(data_file: Path) -> list[dict[str, Any]]:
+    if not data_file.exists():
         return []
 
     try:
-        data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+        data = json.loads(data_file.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return []
 
@@ -89,8 +89,11 @@ def load_classes() -> list[dict[str, Any]]:
     return ensure_data_shape(data)
 
 
-def save_classes(classes: list[dict[str, Any]]) -> None:
-    DATA_FILE.write_text(json.dumps(classes, indent=2, ensure_ascii=False), encoding="utf-8")
+def save_classes(classes: list[dict[str, Any]], data_file: Path) -> None:
+    data_file.write_text(
+        json.dumps(classes, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
 
 def save_groups(class_name: str, groups: list[list[str]]) -> str:
@@ -139,9 +142,7 @@ def sync_presence_from_widget(selected_class: dict[str, Any]) -> bool:
 
 
 # ---------- session bootstrap ----------
-st.set_page_config(page_title="Student Group Generator", layout="wide")
-
-teacher_name_input = st.text_input(
+steacher_name_input = st.text_input(
     "Enter your name",
     placeholder="e.g. Linus G"
 )
@@ -177,7 +178,6 @@ if st.session_state["active_teacher"] != teacher_name:
 
 classes: list[dict[str, Any]] = st.session_state["classes"]
 selected_class = get_selected_class(classes, st.session_state["selected_class_id"])
-
 # ---------- header ----------
 st.title("Student Group Generator")
 st.caption("Manage classes, track attendance, and generate random groups.")
