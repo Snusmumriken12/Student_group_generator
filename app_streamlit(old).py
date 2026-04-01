@@ -261,42 +261,40 @@ with mid_col:
                 st.rerun()
 
         if selected_class["students"]:
-            with st.expander("Select student", expanded=True):
-                selected_student_name = st.radio(
-                    "Select student",
-                    [student["name"] for student in selected_class["students"]],
-                    index=next(
-                        (
-                            idx
-                            for idx, student in enumerate(selected_class["students"])
-                            if student["id"] == st.session_state.selected_student_id
-                        ),
-                        0,
+            selected_student_name = st.radio(
+                "Select student",
+                [student["name"] for student in selected_class["students"]],
+                index=next(
+                    (
+                        idx
+                        for idx, student in enumerate(selected_class["students"])
+                        if student["id"] == st.session_state.selected_student_id
                     ),
-                    horizontal=False,
-                    label_visibility="collapsed",
-                )
+                    0,
+                ),
+                horizontal=False,
+            )
 
-                for student in selected_class["students"]:
-                    if student["name"] == selected_student_name:
-                        st.session_state.selected_student_id = student["id"]
-                        break
+            for student in selected_class["students"]:
+                if student["name"] == selected_student_name:
+                    st.session_state.selected_student_id = student["id"]
+                    break
 
-            with st.expander("Attendance", expanded=True):
-                for student in selected_class["students"]:
-                    key = f"present_{selected_class['id']}_{student['id']}"
-                    if key not in st.session_state:
-                        st.session_state[key] = bool(student["present"])
+            st.markdown("**Attendance**")
+            for student in selected_class["students"]:
+                key = f"present_{selected_class['id']}_{student['id']}"
+                if key not in st.session_state:
+                    st.session_state[key] = bool(student["present"])
 
-                    st.checkbox(student["name"], key=key)
+                st.checkbox(student["name"], key=key)
 
-                if st.button("Save attendance changes", use_container_width=True):
-                    if sync_presence_from_widget(selected_class):
-                        invalidate_groups(selected_class)
-                        save_classes(classes)
-                        st.success("Updated student status.")
-                    else:
-                        st.info("No attendance changes to save.")
+            if st.button("Save attendance changes", use_container_width=True):
+                if sync_presence_from_widget(selected_class):
+                    invalidate_groups(selected_class)
+                    save_classes(classes)
+                    st.success("Updated student status.")
+                else:
+                    st.info("No attendance changes to save.")
 
             selected_student = get_selected_student(selected_class, st.session_state.selected_student_id)
             with st.expander("Rename / remove student"):
