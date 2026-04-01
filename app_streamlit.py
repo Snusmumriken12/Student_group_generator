@@ -278,15 +278,26 @@ with mid_col:
         present = sum(1 for student in selected_class["students"] if student["present"])
         st.caption(f"{present} present out of {total} student{'s' if total != 1 else ''}.")
 
-        new_student_name = st.text_input("New student", placeholder="Student name", label_visibility="collapsed")
-        if st.button("Add Student", use_container_width=True):
+        with st.form("add_student_form", clear_on_submit=True):
+            new_student_name = st.text_input(
+                "New student",
+                placeholder="Student name",
+                label_visibility="collapsed"
+            )
+            submitted = st.form_submit_button("Add Student", use_container_width=True)
+
+        if submitted:
             name = normalize_name(new_student_name)
             if not name:
                 st.error("Student name cannot be empty.")
             elif any(student["name"].lower() == name.lower() for student in selected_class["students"]):
                 st.error("That student already exists.")
             else:
-                selected_class["students"].append({"id": create_id(), "name": name, "present": True})
+                selected_class["students"].append({
+                    "id": create_id(),
+                    "name": name,
+                    "present": True
+                })
                 invalidate_groups(selected_class)
                 save_classes(classes, DATA_FILE)
                 st.success(f'Student "{name}" added.')
