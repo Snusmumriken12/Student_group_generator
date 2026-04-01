@@ -8,11 +8,18 @@ from typing import Any
 
 import streamlit as st
 
-DATA_FILE = Path("classes.json")
 GROUP_EXPORTS_DIR = Path("group_exports")
 
 
 # ---------- helpers ----------
+def normalize_teacher_name(value: str) -> str:
+    return " ".join(value.strip().split()).title()
+
+
+def teacher_file_path(teacher_name: str) -> Path:
+    safe_name = "_".join(teacher_name.strip().lower().split())
+    return Path(f"classes_{safe_name}.json")
+
 def create_id() -> str:
     return f"{int(datetime.now().timestamp() * 1000)}-{random.randint(100000, 999999)}"
 
@@ -134,14 +141,29 @@ def sync_presence_from_widget(selected_class: dict[str, Any]) -> bool:
 # ---------- session bootstrap ----------
 st.set_page_config(page_title="Student Group Generator", layout="wide")
 
-if "classes" not in st.session_state:
-    st.session_state.classes = load_classes()
+teacher_name_input = st.text_input(
+    "Enter your name",
+    placeholder="e.g. Linus G"
+)
 
-if "selected_class_id" not in st.session_state:
+teacher_name = normalize_teacher_name(teacher_name_input)
+
+if not teacher_name:
+    st.title("Student Group Generator")
+    st.caption("Enter your name to load your own classes.")
+    st.stop()
+
+DATA_FILE = teacher_file_path(teacher_name)
+
+if "active_teacher" not in st.session_state:
+    st.session_state.active_teacher = None
+
+if st.session_state.active_teacher != teacher_name:
+    st.session_state.active_teacher = teacher_name
+    st.session_state.classes = load_classes(DATA_FILE)
     st.session_state.selected_class_id = st.session_state.classes[0]["id"] if st.session_state.classes else None
-
-if "selected_student_id" not in st.session_state:
     st.session_state.selected_student_id = None
+
 
 classes: list[dict[str, Any]] = st.session_state.classes
 selected_class = get_selected_class(classes, st.session_state.selected_class_id)
@@ -175,7 +197,7 @@ with left_col:
             classes.append(class_entry)
             st.session_state.selected_class_id = class_entry["id"]
             st.session_state.selected_student_id = None
-            save_classes(classes)
+            save_classes(classes, DATA_FILE)
             st.success(f'Class "{name}" added.')
             st.rerun()
 
@@ -213,7 +235,7 @@ with left_col:
                         else:
                             old_name = selected_class["name"]
                             selected_class["name"] = name
-                            save_classes(classes)
+                            save_classes(classes, DATA_FILE)
                             st.success(f'Renamed "{old_name}" to "{name}".')
                             st.rerun()
 
@@ -228,7 +250,7 @@ with left_col:
                         classes = st.session_state.classes
                         st.session_state.selected_class_id = classes[0]["id"] if classes else None
                         st.session_state.selected_student_id = None
-                        save_classes(classes)
+                        save_classes(classes, DATA_FILE)
                         st.success(f'Deleted class "{deleted_name}".')
                         st.rerun()
     else:
@@ -256,7 +278,7 @@ with mid_col:
             else:
                 selected_class["students"].append({"id": create_id(), "name": name, "present": True})
                 invalidate_groups(selected_class)
-                save_classes(classes)
+                save_classes(classes, DATA_FILE)
                 st.success(f'Student "{name}" added.')
                 st.rerun()
 
@@ -293,7 +315,7 @@ with mid_col:
                 if st.button("Save attendance changes", use_container_width=True):
                     if sync_presence_from_widget(selected_class):
                         invalidate_groups(selected_class)
-                        save_classes(classes)
+                        save_classes(classes, DATA_FILE)
                         st.success("Updated student status.")
                     else:
                         st.info("No attendance changes to save.")
@@ -324,7 +346,7 @@ with mid_col:
                                 old_name = selected_student["name"]
                                 selected_student["name"] = name
                                 invalidate_groups(selected_class)
-                                save_classes(classes)
+                                save_classes(classes, DATA_FILE)
                                 st.success(f'Renamed "{old_name}" to "{name}".')
                                 st.rerun()
 
@@ -342,7 +364,7 @@ with mid_col:
                                 selected_class["students"][0]["id"] if selected_class["students"] else None
                             )
                             invalidate_groups(selected_class)
-                            save_classes(classes)
+                            save_classes(classes, DATA_FILE)
                             st.success(f'Removed "{deleted_name}".')
                             st.rerun()
         else:
@@ -393,7 +415,7 @@ with right_col:
                 if groups is not None:
                     selected_class["groups"] = groups
                     selected_class["generatedAt"] = save_groups(selected_class["name"], groups)
-                    save_classes(classes)
+                    save_classes(classes, DATA_FILE)
                     st.success(f'Groups generated for "{selected_class["name"]}".')
 
         groups_text = format_groups(selected_class["groups"], selected_class["generatedAt"])

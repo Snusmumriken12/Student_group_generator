@@ -25,7 +25,7 @@ def main():
 
         if choice == 1:
             create_class(classes)
-            save_classes(classes)
+            save_classes(classes, DATA_FILE)
         elif choice == 2:
             print("\nclasses")
             for c in classes:
@@ -35,15 +35,15 @@ def main():
 
             if class_name in classes:
                 manage_students(classes[class_name])
-                save_classes(classes)
+                save_classes(classes, DATA_FILE)
             else:
                 print("Class Not Found")
         elif choice == 3:
             rename_class(classes)
-            save_classes(classes)
+            save_classes(classes, DATA_FILE)
         elif choice == 4:
             remove_class(classes)
-            save_classes(classes)
+            save_classes(classes, DATA_FILE)
         elif choice == 5:
             class_name, groups = generate_group(classes)
             if groups:
@@ -51,7 +51,7 @@ def main():
         elif choice == 6:
             print(classes)
         elif choice == 7:
-            save_classes(classes)
+            save_classes(classes, DATA_FILE)
             break
 main()
 

@@ -115,27 +115,24 @@ def load_students() -> list[dict[str, Any]]:
     return data if isinstance(data, list) else []
 
 
-def save_classes(classes: list[dict[str, Any]]) -> None:
-    with CLASSES_FILE.open("w", encoding="utf-8") as file:
-        json.dump(classes, file, indent=4, ensure_ascii=False)
+def save_classes(classes: list[dict[str, Any]], data_file: Path) -> None:
+    data_file.write_text(json.dumps(classes, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 
-def load_classes() -> list[dict[str, Any]]:
-    try:
-        with CLASSES_FILE.open("r", encoding="utf-8") as file:
-            raw_data = json.load(file)
-    except FileNotFoundError:
+def load_classes(data_file: Path) -> list[dict[str, Any]]:
+    if not data_file.exists():
         return []
 
-    classes = _upgrade_classes(raw_data)
+    try:
+        data = json.loads(data_file.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return []
 
-    # Auto-save once after upgrade so the file matches the GUI's expected format.
-    if raw_data != classes:
-        save_classes(classes)
+    if not isinstance(data, list):
+        return []
 
-    return classes
-
+    return ensure_data_shape(data)
 
 
 def save_groups(class_id_or_name: str, groups: list[list[str]]) -> str:
