@@ -156,17 +156,27 @@ if not teacher_name:
 DATA_FILE = teacher_file_path(teacher_name)
 
 if "active_teacher" not in st.session_state:
-    st.session_state.active_teacher = None
+    st.session_state["active_teacher"] = ""
 
-if st.session_state.active_teacher != teacher_name:
-    st.session_state.active_teacher = teacher_name
-    st.session_state.classes = load_classes(DATA_FILE)
-    st.session_state.selected_class_id = st.session_state.classes[0]["id"] if st.session_state.classes else None
-    st.session_state.selected_student_id = None
+if "classes" not in st.session_state:
+    st.session_state["classes"] = []
 
+if "selected_class_id" not in st.session_state:
+    st.session_state["selected_class_id"] = None
 
-classes: list[dict[str, Any]] = st.session_state.classes
-selected_class = get_selected_class(classes, st.session_state.selected_class_id)
+if "selected_student_id" not in st.session_state:
+    st.session_state["selected_student_id"] = None
+
+if st.session_state["active_teacher"] != teacher_name:
+    st.session_state["active_teacher"] = teacher_name
+    st.session_state["classes"] = load_classes(DATA_FILE)
+    st.session_state["selected_class_id"] = (
+        st.session_state["classes"][0]["id"] if st.session_state["classes"] else None
+    )
+    st.session_state["selected_student_id"] = None
+
+classes: list[dict[str, Any]] = st.session_state["classes"]
+selected_class = get_selected_class(classes, st.session_state["selected_class_id"])
 
 # ---------- header ----------
 st.title("Student Group Generator")
