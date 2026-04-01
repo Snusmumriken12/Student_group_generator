@@ -305,93 +305,93 @@ with mid_col:
                 st.success(f'Student "{name}" added.')
                 st.rerun()
 
-        if selected_class["students"]:
-            with st.expander("Select student", expanded=True):
-                selected_student_name = st.radio(
-                    "Select student",
-                    [student["name"] for student in selected_class["students"]],
-                    index=next(
-                        (
-                            idx
-                            for idx, student in enumerate(selected_class["students"])
-                            if student["id"] == st.session_state.selected_student_id
-                        ),
-                        0,
+    if selected_class["students"]:
+        with st.expander("Select student", expanded=True):
+            selected_student_name = st.radio(
+                "Select student",
+                [student["name"] for student in selected_class["students"]],
+                index=next(
+                    (
+                        idx
+                        for idx, student in enumerate(selected_class["students"])
+                        if student["id"] == st.session_state.selected_student_id
                     ),
-                    horizontal=False,
-                    label_visibility="collapsed",
-                )
+                    0,
+                ),
+                horizontal=False,
+                label_visibility="collapsed",
+            )
 
-                for student in selected_class["students"]:
-                    if student["name"] == selected_student_name:
-                        st.session_state.selected_student_id = student["id"]
-                        break
+            for student in selected_class["students"]:
+                if student["name"] == selected_student_name:
+                    st.session_state.selected_student_id = student["id"]
+                    break
 
-            with st.expander("Attendance", expanded=True):
-                for student in selected_class["students"]:
-                    key = f"present_{selected_class['id']}_{student['id']}"
-                    if key not in st.session_state:
-                        st.session_state[key] = bool(student["present"])
+        with st.expander("Attendance", expanded=True):
+            for student in selected_class["students"]:
+                key = f"present_{selected_class['id']}_{student['id']}"
+                if key not in st.session_state:
+                    st.session_state[key] = bool(student["present"])
 
-                    st.checkbox(student["name"], key=key)
+                st.checkbox(student["name"], key=key)
 
-                if st.button("Save attendance changes", use_container_width=True):
-                    if sync_presence_from_widget(selected_class):
-                        invalidate_groups(selected_class)
-                        save_classes(classes, DATA_FILE)
-                        st.success("Updated student status.")
+            if st.button("Save attendance changes", use_container_width=True):
+                if sync_presence_from_widget(selected_class):
+                    invalidate_groups(selected_class)
+                    save_classes(classes, DATA_FILE)
+                    st.success("Updated student status.")
+                else:
+                    st.info("No attendance changes to save.")
+
+        selected_student = get_selected_student(selected_class, st.session_state.selected_student_id)
+        with st.expander("Rename / remove student"):
+            rename_value = st.text_input(
+                "Rename student to",
+                value=selected_student["name"] if selected_student else "",
+                key="rename_student_input",
+            )
+            rename_col, remove_col = st.columns(2)
+
+            with rename_col:
+                if st.button("Rename Student", use_container_width=True):
+                    if selected_student is None:
+                        st.error("Select a student first.")
                     else:
-                        st.info("No attendance changes to save.")
-
-            selected_student = get_selected_student(selected_class, st.session_state.selected_student_id)
-            with st.expander("Rename / remove student"):
-                rename_value = st.text_input(
-                    "Rename student to",
-                    value=selected_student["name"] if selected_student else "",
-                    key="rename_student_input",
-                )
-                rename_col, remove_col = st.columns(2)
-
-                with rename_col:
-                    if st.button("Rename Student", use_container_width=True):
-                        if selected_student is None:
-                            st.error("Select a student first.")
+                        name = normalize_name(rename_value)
+                        if not name:
+                            st.error("Student name cannot be empty.")
+                        elif any(
+                            student["id"] != selected_student["id"] and student["name"].lower() == name.lower()
+                            for student in selected_class["students"]
+                        ):
+                            st.error("That student already exists.")
                         else:
-                            name = normalize_name(rename_value)
-                            if not name:
-                                st.error("Student name cannot be empty.")
-                            elif any(
-                                student["id"] != selected_student["id"] and student["name"].lower() == name.lower()
-                                for student in selected_class["students"]
-                            ):
-                                st.error("That student already exists.")
-                            else:
-                                old_name = selected_student["name"]
-                                selected_student["name"] = name
-                                invalidate_groups(selected_class)
-                                save_classes(classes, DATA_FILE)
-                                st.success(f'Renamed "{old_name}" to "{name}".')
-                                st.rerun()
-
-                with remove_col:
-                    if st.button("Remove Student", use_container_width=True):
-                        if selected_student is None:
-                            st.error("Select a student first.")
-                        else:
-                            deleted_name = selected_student["name"]
-                            deleted_id = selected_student["id"]
-                            selected_class["students"] = [
-                                student for student in selected_class["students"] if student["id"] != deleted_id
-                            ]
-                            st.session_state.selected_student_id = (
-                                selected_class["students"][0]["id"] if selected_class["students"] else None
-                            )
+                            old_name = selected_student["name"]
+                            selected_student["name"] = name
                             invalidate_groups(selected_class)
                             save_classes(classes, DATA_FILE)
-                            st.success(f'Removed "{deleted_name}".')
+                            st.success(f'Renamed "{old_name}" to "{name}".')
                             st.rerun()
-        else:
-            st.info("This class does not have any students yet.")
+
+            with remove_col:
+                if st.button("Remove Student", use_container_width=True):
+                    if selected_student is None:
+                        st.error("Select a student first.")
+                    else:
+                        deleted_name = selected_student["name"]
+                        deleted_id = selected_student["id"]
+                        selected_class["students"] = [
+                            student for student in selected_class["students"] if student["id"] != deleted_id
+                        ]
+                        st.session_state.selected_student_id = (
+                            selected_class["students"][0]["id"] if selected_class["students"] else None
+                        )
+                        invalidate_groups(selected_class)
+                        save_classes(classes, DATA_FILE)
+                        st.success(f'Removed "{deleted_name}".')
+                        st.rerun()
+    else:
+        st.info("This class does not have any students yet.")
 
 
 # ---------- groups ----------
