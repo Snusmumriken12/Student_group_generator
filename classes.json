@@ -1,52 +1,165 @@
-{
-    "4A": [
-        {
-            "name": "Oliver",
-            "status": true
-        },
-        {
-            "name": "Linus",
-            "status": true
-        },
-        {
-            "name": "Mange",
-            "status": true
-        },
-        {
-            "name": "Leo",
-            "status": true
-        },
-        {
-            "name": "Hugo",
-            "status": true
-        },
-        {
-            "name": "Sotirios",
-            "status": true
-        },
-        {
-            "name": "Elliot W",
-            "status": true
-        },
-        {
-            "name": "Elliot G",
-            "status": true
-        },
-        {
-            "name": "Maja",
-            "status": true
-        },
-        {
-            "name": "Alicia",
-            "status": true
-        },
-        {
-            "name": "\u00c4ngla",
-            "status": true
-        },
-        {
-            "name": "Winston",
-            "status": true
-        }
-    ]
-}
+[
+  {
+    "id": "1774954874685-168012",
+    "name": "4a",
+    "students": [
+      {
+        "id": "1774956046494-331127",
+        "name": "Alicia",
+        "present": true
+      },
+      {
+        "id": "1774956051541-352716",
+        "name": "Freja",
+        "present": true
+      },
+      {
+        "id": "1774956056609-305579",
+        "name": "Nalu",
+        "present": true
+      },
+      {
+        "id": "1774956061357-760378",
+        "name": "Elise",
+        "present": true
+      },
+      {
+        "id": "1774956065622-165619",
+        "name": "Nora",
+        "present": true
+      },
+      {
+        "id": "1774956081376-388362",
+        "name": "Elliot G",
+        "present": true
+      },
+      {
+        "id": "1774956087648-386098",
+        "name": "Valter",
+        "present": true
+      },
+      {
+        "id": "1774956093156-262480",
+        "name": "Vera",
+        "present": true
+      },
+      {
+        "id": "1774956097827-821811",
+        "name": "Ida",
+        "present": true
+      },
+      {
+        "id": "1774956101867-262228",
+        "name": "Oliver",
+        "present": true
+      },
+      {
+        "id": "1774956103086-738440",
+        "name": "Olle",
+        "present": true
+      },
+      {
+        "id": "1774956106937-106731",
+        "name": "Leo",
+        "present": true
+      },
+      {
+        "id": "1774956111358-426652",
+        "name": "Willem",
+        "present": true
+      },
+      {
+        "id": "1774956116257-132931",
+        "name": "Hugo",
+        "present": true
+      },
+      {
+        "id": "1774956121414-210710",
+        "name": "Sotirios",
+        "present": true
+      },
+      {
+        "id": "1774956126265-346173",
+        "name": "Jan",
+        "present": true
+      },
+      {
+        "id": "1774956130425-268323",
+        "name": "Märta",
+        "present": true
+      },
+      {
+        "id": "1774956134975-502762",
+        "name": "Maja",
+        "present": true
+      },
+      {
+        "id": "1774956138656-932641",
+        "name": "Ängla",
+        "present": true
+      },
+      {
+        "id": "1774956142754-306517",
+        "name": "Winston",
+        "present": true
+      },
+      {
+        "id": "1774956162732-333742",
+        "name": "Eddie",
+        "present": true
+      },
+      {
+        "id": "1774956168405-579142",
+        "name": "Elliot W",
+        "present": true
+      }
+    ],
+    "groups": [
+      [
+        "Elliot W",
+        "Elliot G"
+      ],
+      [
+        "Sotirios",
+        "Jan"
+      ],
+      [
+        "Nora",
+        "Freja"
+      ],
+      [
+        "Hugo",
+        "Nalu"
+      ],
+      [
+        "Elise",
+        "Ida"
+      ],
+      [
+        "Valter",
+        "Vera"
+      ],
+      [
+        "Ängla",
+        "Leo"
+      ],
+      [
+        "Märta",
+        "Willem"
+      ],
+      [
+        "Eddie",
+        "Olle"
+      ],
+      [
+        "Oliver",
+        "Winston"
+      ],
+      [
+        "Maja",
+        "Alicia"
+      ]
+    ],
+    "generatedAt": "2026-04-01 12:41:28"
+  }
+]

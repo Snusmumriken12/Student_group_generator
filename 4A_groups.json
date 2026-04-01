@@ -1,27 +1,38 @@
 {
-    "class": "4A",
+    "class": "4a",
     "groups": [
         [
-            "Alicia",
-            "Maja",
-            "Winston"
-        ],
-        [
-            "Sotirios",
-            "Oliver",
+            "Ängla",
+            "Olle",
+            "Jan",
+            "Elise",
             "Elliot G"
         ],
         [
+            "Oliver",
+            "Valter",
+            "Maja",
+            "Vera",
+            "Freja"
+        ],
+        [
+            "Eddie",
+            "Nora",
+            "Hugo",
+            "Sotirios",
+            "Alicia"
+        ],
+        [
+            "Elliot W",
             "Leo",
-            "\u00c4ngla"
+            "Ida",
+            "Märta",
+            "Willem"
         ],
         [
-            "Linus",
-            "Hugo"
-        ],
-        [
-            "Mange",
-            "Elliot W"
+            "Nalu",
+            "Winston"
         ]
-    ]
+    ],
+    "generatedAt": "2026-03-31 14:17"
 }

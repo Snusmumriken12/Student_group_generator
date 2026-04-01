@@ -1,0 +1,45 @@
+Generated: 2026-04-01 12:41:28
+
+Group 1
+- Elliot W
+- Elliot G
+
+Group 2
+- Sotirios
+- Jan
+
+Group 3
+- Nora
+- Freja
+
+Group 4
+- Hugo
+- Nalu
+
+Group 5
+- Elise
+- Ida
+
+Group 6
+- Valter
+- Vera
+
+Group 7
+- Ängla
+- Leo
+
+Group 8
+- Märta
+- Willem
+
+Group 9
+- Eddie
+- Olle
+
+Group 10
+- Oliver
+- Winston
+
+Group 11
+- Maja
+- Alicia
